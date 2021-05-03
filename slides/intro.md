@@ -1,14 +1,12 @@
 class: center, middle
 
-# Title of the Talk
+# IB I Hardly Knew Ye
 
-Your Name
+Kyle Benson
 
-![:img psadmin.io, 50%](images/psadmin_io.png)
+![:img psadmin.io, 25%](images/psadmin_io_blue.png)
 
-Session ID: **12345**
-
-https://wiki.psadmin.io/talk.TALKNAME
+https://wiki.psadmin.io/talk.ib-i-hardly-knew-ye
 
 ???
 
@@ -19,7 +17,16 @@ Notes go here
 # Agenda
 
 1. Introduction
-1. Talks
+1. Integration Broker Overview
+1. Asynchronous
+1. Synchronous
+1. Configuration Options
+1. Tips and Tricks
+    1. Nodes
+    1. Only one active Domain (failover?)
+    1. Master/Slave
+    1. Introspection and Deployment
+    1. Pin Q's to Domains?
 1. Questions
 
 ???
@@ -41,23 +48,13 @@ Providing *PeopleSoft* and *Oracle Cloud* services with a knowledge sharing and 
 
 ---
 
-# Dan Iverson
-
-* PeopleSoft Architect
-* Oracle Cloud Infrastructure Architect
-* [Oracle ACE](https://psadmin.io/ace-dan)
-* [Oracle Certified](https://www.youracclaim.com/users/dan-iverson/badges)
-* 17+ Years using PeopleSoft and Oracle
-
----
-
 # Kyle Benson
 
 * PeopleSoft Architect
 * Oracle Cloud Infrastructure Architect
 * [Oracle ACE](https://psadmin.io/ace-kyle)
 * [Oracle Certified](https://www.youracclaim.com/users/kyle-benson/badges)
-* 13+ years using PeopleSoft and Oracle
+* 14+ years using PeopleSoft and Oracle
 
 ---
 class: center, middle, no-padding

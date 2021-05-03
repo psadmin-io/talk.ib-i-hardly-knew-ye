@@ -6,6 +6,6 @@ class: center, middle
 
 # Contact psadmin.io
 
-* psadmin.io/oci
-* psadmin.io/community
+* https://psadmin.io
+* https://psadmin.io/community
 * info@psadmin.io
