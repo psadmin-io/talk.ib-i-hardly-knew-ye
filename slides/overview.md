@@ -39,25 +39,22 @@ class: center, middle
 ---
 # Service Operations
 
-A service operation in the PeopleSoft system contains the processing logic for an integration and determines if the integration is to be processed synchronously or asynchronously. 
-
-A service operation definition contains the following definitions:
-
 * Message
     * A message contains the payload of the integration.
 * XML message schema
-    * Message schemas provide the physical description of the data that is being sent, including descriptions of fields, field types, field lengths, and so on.
+    * Message schemas provide the physical description of the data that is being sent.
 * Handler
     * A service operation handler contains the processing logic for the service operation.
 * Routing
-    * A routing definition specifies the direction of the integration (inbound or outbound), routing alias names, transformations, and more.
-
+    * A routing definition specifies the direction of the integration, and more.
 
 [PeopleBooks](https://docs.oracle.com/cd/F30998_01/pt858pbr2/eng/pt/tibr/concept_ServiceOperations-076580.html?pli=ul_d76e35_tibr)
 
 ???
 
-TODO
+A service operation in the PeopleSoft system contains the processing logic for an integration and determines if the integration is to be processed synchronously or asynchronously. 
+
+A service operation definition contains the following definitions:
 
 ---
 # Asynchronous Services
@@ -154,7 +151,7 @@ TODO
 # Synchronous Services
 ## Publication
 
-![:img psadmin.io, 100%](images/sync-pub.png)
+![:img psadmin.io, 70%](images/sync-pub.png)
 
 ???
 
@@ -169,7 +166,7 @@ TODO
 # Synchronous Services
 ## Subscription
 
-![:img psadmin.io, 100%](images/sync-sub.png)
+![:img psadmin.io, 50%](images/sync-sub.png)
 
 ???
 

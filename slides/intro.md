@@ -18,15 +18,8 @@ Notes go here
 
 1. Introduction
 1. Integration Broker Overview
-1. Asynchronous
-1. Synchronous
 1. Configuration Options
-1. Tips and Tricks
-    1. Nodes
-    1. Only one active Domain (failover?)
-    1. Master/Slave
-    1. Introspection and Deployment
-    1. Pin Q's to Domains?
+1. Tips and Tricks Demo
 1. Questions
 
 ???
