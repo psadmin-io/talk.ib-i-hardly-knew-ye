@@ -187,6 +187,10 @@ Service Operations come in 2 main types
     * Error. An error occurred.
 
 ---
+class: center, middle, gray
+# Monitor
+
+---
 # Synchronous Services
 ## Publication
 
@@ -215,3 +219,7 @@ Service Operations come in 2 main types
 1. The integration engine updates the database tables as well as sends the status information to the Service Operations Monitor. The possible statuses in the Service Operations Monitor for a synchronous publication are:
     * Done. The integration gateway was able to deliver the service operation to the destination node.
     * Error. The integration gateway was not able to deliver the service operation to the destination node.
+
+---
+class: center, middle, gray
+# Monitor
