@@ -24,13 +24,22 @@ Notes go here
 
 ???
 
-Notes go here
+* Pretty boring topic, but important
+  * Want at least half of this to be interactive DEMO
+* Mostly admin - want more dev stuff? JSMPros!
+* Walk through IB
+  * Ask Questions in chat!!!!
+* Talk through different setups
+  * maybe a poll and discussion?
+* Demo 
+  * raise hand if you want to see something!
+* Questions
 
 ---
 
 # About psadmin.io
 
-Providing *PeopleSoft* and *Oracle Cloud* services with a knowledge sharing and training first focus.
+Providing *PeopleSoft* and *Oracle Cloud* services with a knowledge sharing and training first focus
 
 * Services
 * Conference

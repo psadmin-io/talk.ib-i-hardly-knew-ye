@@ -9,6 +9,12 @@ class: center, middle
 
 [PeopleBooks](https://docs.oracle.com/cd/F30998_01/pt858pbr2/eng/pt/tibr/concept_IntroductiontoPeopleSoftIntegrationBroker-076593.html?pli=ul_d76e35_tibr)
 
+???
+
+* High level, this is how it lays out
+  * Gateway in GREEN
+  * Engine in YELLOW
+
 ---
 class: center, middle
 # Integration Gateway
@@ -22,6 +28,8 @@ class: center, middle
 * The “web” part of IB
 * Gateway Manager is the black box that does all the processing
 * Everything else is modular
+* You can create your own connectors, if you want
+  * PeopleSoft and HTTP are mainly used
 
 ---
 class: center, middle
@@ -35,6 +43,10 @@ class: center, middle
 
 * The “app” part of IB
 * Runs in an App Domain – PSAPPSRV
+* Not sure if PUBSUB is technically part of this, but I lump it in
+* Modular as well
+* Handlers are main areas of focus for delivered and custom business logic, etc
+* Transformation engine is another big area
 
 ---
 # Service Operations
@@ -54,7 +66,15 @@ class: center, middle
 
 A service operation in the PeopleSoft system contains the processing logic for an integration and determines if the integration is to be processed synchronously or asynchronously. 
 
-A service operation definition contains the following definitions:
+---
+class: center, middle, gray
+# Asynchronous and Synchronous
+
+???
+
+Service Operations come in 2 main types
+* Async sends the request and moves one
+* Sync send the request and waits for response
 
 ---
 # Asynchronous Services
@@ -65,16 +85,19 @@ A service operation definition contains the following definitions:
 ???
 
 * Publication broker 
-    * Acts as the routing mechanism. When an asynchronous service operation arrives in its queue, the publication broker service runs the defined routing rules. 
-    * If the service operation needs to be published to a remote node, it routes the service operation to the publication contractor service. 
-    * If the service operation is subscribed to on the local node, then the publication broker routes the service operation to the subscription contractor service. 
-    * Routing involves submitting either a subscription or publication contract to the appropriate contractor, followed by an asynchronous call to the contractor service notifying it that work is waiting in the queue.
+    * Acts as the routing mechanism, running routing rules. 
+    * If published to a remote node, it routes to the publication contractor service. 
+    * If subscribed to on the local node, it routes  to the subscription contractor service. 
+    * Routing involves 
+        1. Submitting either a subscription or publication contract
+        1. Asynchronous call to the contractor service notifying it that work is waiting in the queue.
 * Publication contractor 
-    * References the publication contract submitted by the publication broker service and performs an HTTP post of the publication service operation to the integration gateway. 
-    * When the integration gateway sends a reply indicating that it received the publication service operation, the publication contractor service updates the publication contract with the status of subscription processing (Done or Retry). 
+    1. Performs an HTTP post of the publication service operation to the integration gateway. 
+    1. Gateway replies indicating that it received the publication service operation
+    1. Publication contract is updated with the status of subscription processing (Done or Retry). 
 * Subscription contractor 
-    * References the subscription contract submitted by the publication broker service and runs the appropriate notification PeopleCode. 
-    * Then it updates the subscription contract concerning the status of the subscription processing. 
+    1. Runs the appropriate handler (notification PeopleCode) 
+    1. Subscription contract updates the status of the subscription processing
 
 ---
 # Asynchronous Services
@@ -84,18 +107,22 @@ A service operation definition contains the following definitions:
 
 ???
 
-1. The service operation is published and enters the message queue. 
-    * The instance is written to the PSAPMSGPUBHDR table in the database, but is not yet dispatched.
+1. Published to the message queue
+    * The instance is written to the PSAPMSGPUBHDR table
+        * Not yet dispatched.
     * The broker dispatcher process picks up the service operation instance from its queue. 
-    * During this stage, the service operation instance status in the Service Operations Monitor is New.
-1. The broker dispatcher process passes the service operation instance to the broker handler process. 
-    * During this stage, the service operation instance status in the Service Operations Monitor is Started.
-1. The broker handler process accepts the service operation instance, reads the data, and runs the routing rules to determine where the publication needs to be delivered. 
-    * The broker handler process then writes a publication contract in the PSAPMSGPUBCON table and notifies the publication contractor service that it has an item to process. 
-    * During this stage, the service operation instance status in the Service Operation Monitor is Working.
-1. After the service operation is stored in the publication contact queue, the status of the publication contract in the Service Operations Monitor is New, the service operation instance status is Done, and the publication dispatcher process picks up the publication contract from its queue. 
-1. The publication dispatcher process passes the service operation instance to the publication handler process.
-    * During this stage, the publication contract status in the Service Operations Monitor is Started.
+    * Status is New.
+2. Broker dispatcher process passes to the broker handler process. 
+    * Status is Started.
+3. Broker handler process accepts runs the routing rules
+    * The contract is written to the PSAPMSGPUBCON table and notifies the publication contractor
+    * Status is Working.
+4. Now in publication contact queue
+    * Status of the publication contract is New
+    * Status of the service operation instance is Done
+    * Publication dispatcher process picks up the publication contract from its queue. 
+5. Publication dispatcher process passes to the publication handler process.
+    * Status is Started.
 
 ---
 # Asynchronous Services
@@ -104,14 +131,15 @@ A service operation definition contains the following definitions:
 ![:img psadmin.io, 75%](images/async-3.png)
 
 ???
-1. The publication dispatcher picks up the publication contract from the publication contract queue.
-1. The publication contract is written to the PSAPMSGPUBCON table in the database, but is not yet dispatched. The publication dispatcher process passes the publication contract to the publication handler process. 
-    * At this stage the status of the publication contract in the Service Operation Monitor is Started.
-1. The publication handler process accepts the publication contract and attempts to deliver the service operation to the integration gateway. 
-    * At this stage, the status of the publication contract in the Service Operations Monitor is Working.
-1. The integration gateway attempts to pass the publication contract to the destination node.
-1. The integration gateway passes the status of the publication contract back to the publication handler.
-1. The publication handler updates the Service Operations Monitor with the status of the publication contract. The typical statuses that displays in the Service Operations Monitor are:
+1. The publication dispatcher picks up the publication contract queue.
+2. The publication contract is written to the PSAPMSGPUBCON table in the database
+    * Passes the publication contract to the publication handler process. 
+    * Status is Started.
+3. Handler accepts and attempts to deliver the service operation to the integration gateway. 
+    * Status is Working
+4. Gateway attempts to pass the publication contract to the destination node.
+5. Gateway passes the status of the publication contract back to the publication handler.
+6. Handler updates the Service Operations Monitor with the status of the publication contract. 
     * Done. The subscribing node successfully received the contract.
     * Timeout. The system timed out before the transaction processing was completed.
     * Retry. The system encountered and error. The retry is automatic.
