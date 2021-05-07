@@ -153,12 +153,21 @@ Service Operations come in 2 main types
 
 ???
 
-1. The service operation enters the message queue. The instance is written to the database, but not yet dispatched The broker dispatcher process picks up the service operation instance from its queue. During this stage, the status of the service operation instance in the Service Operations Monitor is New.
-1. The broker dispatcher process passes the service operation instance to the broker handler process. During this stage, the status of the service operation instance in the Service Operations Monitor is Started.
-1. The broker handler process accepts the service operation instance, reads the data, and runs the subscription routing rules to determine if the service operation needs to be processed locally. During this stage, the status of the service operation instance in the Service Operations Monitor is Working.
-1. The broker handler process then writes a subscription contract in the PSAPMSGPUBCON table (the subscription contract queue) and notifies the subscription contractor service that it has an item to process. During this stage, the status of the service operation instance in the Service Operations Monitor is Working.
-1. Once the service operation is stored in the subscription contact queue, the status of the service operation instance in the Service Operations Monitor is Done. Processing of the subscription contract begins as the subscription dispatcher process picks up the subscription contract from its queue, and the status of the subscription contract in the Service Operations Monitor is New. In this example, at the point when the status of the asynchronous service operation instance is Done, the subscription contract status is New. Asynchronous subscription contract processing is described in the next section.
-
+1. Enters the message queue by being written to the database
+    * The broker dispatcher process picks up the service operation instance from its queue. 
+    * Status is New
+2. The broker dispatcher process passes the service operation instance to the broker handler process. 
+    * Status is Started
+3. Broker handler process accepts runs the routing rules
+    * Status is Working
+4. The broker handler process 
+    * Writes a subscription contract in the PSAPMSGPUBCON table (the subscription contract queue)
+    * Notifies the subscription contractor service that it has an item to process. 
+    * Status is Working
+5. Once the service operation is stored in the subscription contact queue
+    * Status of the service operation instance is Done. 
+    * Status of the subscription contract is New. 
+    
 ---
 # Asynchronous Services
 ## Subscription Contract
@@ -167,11 +176,13 @@ Service Operations come in 2 main types
 
 ???
 
-1. The subscription dispatchers picks up the contract from the subscription contract queue.
-1. The subscription dispatcher process passes the subscription contract to the subscription handler process. At this stage the status of the subscription contract in the Service Operations Monitor is Started.
-1. The subscription handler process accepts the subscription contract and runs the notification PeopleCode. 
-1. In the example shown in the diagram, the notification PeopleCode then uses the service operation data to update application data tables. However, the notification PeopleCode can use the service operation data as input to   look up information, create and publish another service operation, and so forth. At this stage, the status of the publication contract in the Service Operations Monitor is Working. 
-1. The subscription handler passes the status of the subscription contract to the Service Operations Monitor. The typical statuses that display in the Service Operations Monitor for an asynchronous subscription contract are:
+1. Sub ispatchers picks up the contract from the queue.
+2. Sub Dispatcher process passes the sub contract to the sub handler
+    * Status is Started.
+3. Sub handler process accepts the subscription contract and runs the handler (notification PeopleCode) 
+4. Notification PeopleCode then uses the service operation data to update application data tables, etc
+    * Status is Working. 
+5. The subscription handler passes the status of the subscription contract to the Service Operations Monitor. The typical statuses that display in the Service Operations Monitor for an asynchronous subscription contract are:
     * Done. The notification PeopleCode ran successfully.   
     * Error. An error occurred.
 
@@ -184,9 +195,9 @@ Service Operations come in 2 main types
 ???
 
 1. The integration engine sends the service operation to the integration gateway. 
-1. The integration gateway attempts to deliver the service operation to the destination node.
-1. The integration gateway sends back the status information to the integration engine
-1. The integration engine updates the database tables as well as sends the status information to the Service Operations Monitor. The possible statuses in the Service Operations Monitor for a synchronous publication are:
+2. The integration gateway attempts to deliver the service operation to the destination node.
+3. The integration gateway sends back the status information to the integration engine
+4. The integration engine updates the database tables as well as sends the status information to the Service Operations Monitor. The possible statuses in the Service Operations Monitor for a synchronous publication are:
     * Done. The integration gateway was able to deliver the service operation to the destination node.
     * Error. The integration gateway was not able to deliver the service operation to the destination node.
 
