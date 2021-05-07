@@ -151,6 +151,6 @@ class: center, middle, blue
     * Can't change to primary without manual configuration change
 * Template
     * Import a primary domain as a secondary domain via PSADMIN
-    * Brings in all Sub/Sub process and queue list settings
+    * Brings in all Pub/Sub process and queue list settings
 
 ???

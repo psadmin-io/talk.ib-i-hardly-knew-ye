@@ -18,8 +18,8 @@ class: center, middle, blue
 * `http://fs.lab.conf.oraclevcn.com:8000/PSIGW/PeopleSoftListeningConnector`
 * Add gateway to `PSFT_EP` node
    * **SETUP PORTAL**
-     * http://hr.lab.conf.oraclevcn.com:8000/psc/ps/
-     * http://hr.lab.conf.oraclevcn.com:8000/psc/ps/
+     * http://fs.lab.conf.oraclevcn.com:8000/psc/ps/
+     * http://fs.lab.conf.oraclevcn.com:8000/psc/ps/
    * Ping Node with Local
    * Change to FS
    * Ping again
@@ -30,6 +30,7 @@ class: center, middle, blue
 ???
 * Good for managing IB, but also for UniNav
     * A lot of "magic" when adding nodes to network
+* Open NEW WINDOW for node 
 * Show node routings status
 * Add FS to Network
 * Show routings status again

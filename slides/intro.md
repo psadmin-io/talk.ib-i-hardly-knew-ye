@@ -10,7 +10,7 @@ https://wiki.psadmin.io/talk.ib-i-hardly-knew-ye
 
 ???
 
-Notes go here
+* **DEMO PREP**: Setup PSFT_HR in FS SSO config!
 
 ---
 
