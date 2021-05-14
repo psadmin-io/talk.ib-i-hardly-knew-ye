@@ -190,6 +190,10 @@ Service Operations come in 2 main types
 class: center, middle, gray
 # Monitor
 
+???
+
+* Show Operation Instance and Sub message in Async Monitor
+
 ---
 # Synchronous Services
 ## Publication
@@ -223,3 +227,7 @@ class: center, middle, gray
 ---
 class: center, middle, gray
 # Monitor
+
+???
+
+Show sync, talk about routing - GETSECURITYVALUES_GET
